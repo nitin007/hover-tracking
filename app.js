@@ -9,6 +9,11 @@ var socket = require("socket.io");
 var path = require('path');
 var app = express();
 
+var databaseUrl = "hoverTracker"; // "username:password@example.com/mydb"
+var collections = ["positions"];
+db = require("mongojs").connect(databaseUrl, collections);
+
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
@@ -26,7 +31,6 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/users', user.list);
 app.get('/hover-counts', routes.hoverCounts);
 app.post('/', routes.index);
 
@@ -35,3 +39,10 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 });
 
 io = socket.listen(server);
+// io.disable('heartbeats');
+
+io.sockets.on('connection', function(client){
+  db.positions.runCommand('count', function(err, count) {
+    client.emit("count", count.n);
+  });
+});

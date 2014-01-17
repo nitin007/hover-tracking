@@ -8,19 +8,12 @@ HoverCount.prototype = {
     this.server = io.connect("http://127.0.0.1:3000");
     
     // init functions
-    this.initClientConnect();
+    this.updateHoverCount();
   },
   
-  initClientConnect: function(){
-    var that = this;
-    
-    this.server.on('connect', function(data, clients){
-      // alert('connected');
-    });
-    
+  updateHoverCount: function(){
     this.server.on('count', function(count){
-      $('.connected').text(count);
-      // alert(count);
+      $('h2').text(count);
     });
   }  
 }

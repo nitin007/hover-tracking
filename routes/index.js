@@ -2,10 +2,6 @@
  * GET home page.
  */
 
-var databaseUrl = "hoverTracker"; // "username:password@example.com/mydb"
-var collections = ["positions"];
-var db = require("mongojs").connect(databaseUrl, collections);
-
 exports.index = function(req, res) {
   if (req.xhr) {
     db.positions.save({name: req.body.name, coords: req.body.coords}, function(err, saved) {
@@ -17,8 +13,8 @@ exports.index = function(req, res) {
         console.log("Coords saved");
         
         //send total no of rows to client sockets
-        db.positions.runCommand('count', function(err, res) {
-          io.sockets.emit("count", {totalCount: res});
+        db.positions.runCommand('count', function(err, count) {
+          io.sockets.emit("count", count.n);
         });
       }
     });
