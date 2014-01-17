@@ -6,8 +6,9 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "3.3.8",
+    "express": "~3.3.8",
     "jade": "*",
-    "mongojs": "*"
+    "mongojs": "*",
+    "socket.io": "~0.9.16"
   }
 }

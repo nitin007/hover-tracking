@@ -1,18 +1,11 @@
-
 /**
  * Module dependencies.
  */
 
-// var databaseUrl = "hoverTracker"; // "username:password@example.com/mydb"
-// var collections = ["positions", "hoverCounts"]
-// var db = require("mongojs").connect(databaseUrl, collections);
-
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
-
 var app = express();
 
 // all environments
@@ -28,13 +21,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+    app.use(express.errorHandler());
 }
-
 app.get('/', routes.index);
-app.get('/users', user.list);
 app.post('/', routes.index);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+var server = http.createServer(app).listen(app.get('port'), function() {
+    console.log("listen");
 });
+io = require('socket.io').listen(server);
