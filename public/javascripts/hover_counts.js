@@ -5,7 +5,7 @@ var HoverCount = function(){
 HoverCount.prototype = {
   init: function(){
     // variables
-    this.server = io.connect("http://127.0.0.1:3000");
+    this.server = io.connect(document.location.origin);
     
     // init functions
     this.updateHoverCount();
