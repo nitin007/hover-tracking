@@ -19,7 +19,7 @@ exports.index = function(req, res) {
       }
     });
   } else {
-      res.render('index', {title: 'Hover Tracking'});
+      res.render('index', {title: 'Hover Tracker'});
     }
 }
 

@@ -9,7 +9,7 @@ var socket = require("socket.io");
 var path = require('path');
 var app = express();
 
-var databaseUrl = "hoverTracker"; // "username:password@example.com/mydb"
+var databaseUrl = process.env.MONGOHQ_URL || "hoverTracker"; // "username:password@example.com/mydb"
 var collections = ["positions"];
 db = require("mongojs").connect(databaseUrl, collections);
 
