@@ -9,8 +9,7 @@ var db = require("mongojs").connect(databaseUrl, collections);
 
 exports.index = function(req, res){
   if(req.xhr){
-    data = req.body;
-    db.positions.save({name: data.name, coords: data.coords}, function(err, saved) {
+    db.positions.save({name: req.body.name, coords: req.body.coords}, function(err, saved) {
       if( err || !saved ) {
         res.end("Coords not saved");
         console.log("Coords not saved");
@@ -24,3 +23,7 @@ exports.index = function(req, res){
     res.render('index', { title: 'Hover Tracking' });
   }
 };
+
+exports.hoverCounts = function(req, res){
+  res.render('hover_counts', { title: 'Hover Counts' });
+}
