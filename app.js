@@ -1,19 +1,12 @@
-
 /**
  * Module dependencies.
  */
 
-// var databaseUrl = "hoverTracker"; // "username:password@example.com/mydb"
-// var collections = ["positions", "hoverCounts"]
-// var db = require("mongojs").connect(databaseUrl, collections);
-
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
 var http = require('http');
 var socket = require("socket.io");
 var path = require('path');
-
 var app = express();
 
 // all environments
