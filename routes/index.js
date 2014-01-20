@@ -3,7 +3,8 @@
  */
 
 exports.index = function(req, res) {
-  if (req.xhr) {
+  // if (req.xhr) {
+    console.log(req.body);
     db.positions.save({name: req.body.name, coords: req.body.coords}, function(err, saved) {
       if (err || !saved) {
         res.end("Coords not saved");
@@ -18,9 +19,10 @@ exports.index = function(req, res) {
         });
       }
     });
-  } else {
-      res.render('index', {title: 'Hover Tracker'});
-    }
+  // } else {
+  //     console.log(req.body);
+  //     res.render('index', {title: 'Hover Tracker'});
+  //   }
 }
 
 exports.hoverCounts = function(req, res){
