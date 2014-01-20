@@ -8,10 +8,10 @@ exports.index = function(req, res) {
     db.positions.save({name: req.body.name, coords: req.body.coords}, function(err, saved) {
       if (err || !saved) {
         res.end("Coords not saved");
-        console.log("Coords not saved");
+        // console.log("Coords not saved");
       } else {
         res.end("Coords saved");
-        console.log("Coords saved");
+        // console.log("Coords saved");
         
         //send total no of rows to client sockets
         db.positions.runCommand('count', function(err, count) {
