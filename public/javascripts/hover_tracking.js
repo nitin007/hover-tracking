@@ -1,5 +1,5 @@
 var HoverTracking = function() {
-    this.pageLimit = 55;
+    this.pageLimit = 100000;
     this.init();
 }
 

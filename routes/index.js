@@ -26,3 +26,7 @@ exports.index = function(req, res) {
 exports.hoverCounts = function(req, res){
   res.render('hover_counts', { title: 'Hover Counts' });
 }
+
+exports.blitz = function(req, res){
+  res.end('42');
+}
