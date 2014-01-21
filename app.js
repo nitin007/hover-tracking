@@ -35,7 +35,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/hover-counts', routes.hoverCounts);
 app.post('/', routes.index);
-app.get('/mu-78a55afd-003dfde5-d4afa351-621d9a1e', routes.blitz)
+app.get('/mu-be6d30bd-e9ba653e-3df1812a-6e7174cd', routes.blitz)
 
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
