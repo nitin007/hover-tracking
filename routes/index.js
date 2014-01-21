@@ -4,7 +4,7 @@
 
 exports.index = function(req, res) {
   // if (req.xhr) {
-    // console.log(req);
+    console.log(req.body);
     db.positions.save({name: req.body.name, coords: req.body.coords}, function(err, saved) {
       if (err || !saved) {
         res.end("Coords not saved");
