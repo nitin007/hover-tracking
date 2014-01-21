@@ -30,3 +30,7 @@ exports.hoverCounts = function(req, res){
 exports.blitz = function(req, res){
   res.end('42');
 }
+
+exports.records = function(req, res){
+  res.end('123');
+}
