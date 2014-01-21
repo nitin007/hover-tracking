@@ -6,11 +6,11 @@ exports.index = function(req, res) {
   // if (req.xhr) {
     db.positions.save({name: req.body.name, coords: req.body.coords}, function(err, saved) {
       if (err || !saved) {
-        res.end("not saved");
-        console.log(++errCount);
+        res.end();
+        // console.log(++errCount);
       } else {
-        res.end("saved");
-        console.log(++sucCount);
+        res.end();
+        // console.log(++sucCount);
         
         //send total no of rows to client sockets
         db.positions.runCommand('count', function(err, count) {
