@@ -12,6 +12,7 @@
     "express": "~3.3.8",
     "jade": "*",
     "mongojs": "*",
-    "socket.io": "~0.9.16"
+    "socket.io": "~0.9.16",
+    "cluster2": "*"
   }
 }

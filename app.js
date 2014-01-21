@@ -6,6 +6,8 @@ errCount = 0;
 sucCount = 0;
 var express = require('express');
 var routes = require('./routes');
+var cluster = require('cluster');
+var os = require("os");
 var http = require('http');
 var socket = require("socket.io");
 var path = require('path');
@@ -37,15 +39,25 @@ app.get('/hover-counts', routes.hoverCounts);
 app.post('/', routes.index);
 app.get('/mu-be6d30bd-e9ba653e-3df1812a-6e7174cd', routes.blitz)
 
-var server = http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
 
-io = socket.listen(server);
-// io.disable('heartbeats');
+if (cluster.isMaster) {
+	console.log("CPUS: " + os.cpus().length);
+	for (var i = 0; i < os.cpus().length / 2; i++) {
+		var worker = cluster.fork();
+	}
+} else {
+  // var server = http.createServer(app).listen(app.get('port'), function(){
+  //   console.log('Express server listening on port ' + app.get('port'));
+  // });  
+  server = app.listen(3000);
+  console.log("listening");  
+  
+  io = socket.listen(server);
+  // io.disable('heartbeats');
 
-io.sockets.on('connection', function(client){
-  db.positions.runCommand('count', function(err, count) {
-    client.emit("count", count.n);
-  });
-});
+  io.sockets.on('connection', function(client){
+    db.positions.runCommand('count', function(err, count) {
+      client.emit("count", count.n);
+    });
+  });  
+}
