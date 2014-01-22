@@ -18,6 +18,8 @@ var collections = ["positions"];
 db = require("mongojs").connect(databaseUrl, collections);
 
 
+http.globalAgent.maxSockets = 2000;
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
