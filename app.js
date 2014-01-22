@@ -13,7 +13,7 @@ var socket = require("socket.io");
 var path = require('path');
 var app = express();
 
-var databaseUrl = "hoverTracker"; // "username:password@example.com/mydb"
+var databaseUrl = "mongodb://node:123456@widmore.mongohq.com:10010/hover-tracker" || "hoverTracker"; // "username:password@example.com/mydb"
 var collections = ["positions"];
 db = require("mongojs").connect(databaseUrl, collections);
 
@@ -23,7 +23,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.favicon());
-// app.use(express.logger('dev'));
+app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
@@ -37,27 +37,25 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/hover-counts', routes.hoverCounts);
 app.post('/', routes.index);
-app.get('/mu-be6d30bd-e9ba653e-3df1812a-6e7174cd', routes.blitz)
+app.get('/mu-be6d30bd-e9ba653e-3df1812a-6e7174cd', routes.blitz);
+app.get('/doNothing', routes.doNothing);
+app.post('/loadTest', routes.loadTest);
 
 
-if (cluster.isMaster) {
-	console.log("CPUS: " + os.cpus().length);
-	for (var i = 0; i < os.cpus().length / 2; i++) {
-		var worker = cluster.fork();
-	}
-} else {
-  // var server = http.createServer(app).listen(app.get('port'), function(){
-  //   console.log('Express server listening on port ' + app.get('port'));
-  // });  
+// if (cluster.isMaster) {
+//   console.log("CPUS: " + os.cpus().length);
+//   for (var i = 0; i < os.cpus().length / 2; i++) {
+//     var worker = cluster.fork();
+//   }
+// } else {
   server = app.listen(3000);
-  console.log("listening");  
+  console.log('Express server listening on port ' + app.get('port'));
   
   io = socket.listen(server);
-  // io.disable('heartbeats');
 
   io.sockets.on('connection', function(client){
     db.positions.runCommand('count', function(err, count) {
       client.emit("count", count.n);
     });
   });  
-}
+// }
