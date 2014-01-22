@@ -47,5 +47,7 @@ exports.loadTest = function(req, res){
 }
 
 exports.doNothing = function(req, res){
+  res.writeHead(200);
+  // res.connection.setTimeout(0);
   res.end();
 }
