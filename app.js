@@ -42,12 +42,12 @@ app.get('/doNothing', routes.doNothing);
 app.post('/loadTest', routes.loadTest);
 
 
-if (cluster.isMaster) {
-  console.log("CPUS: " + os.cpus().length);
-  for (var i = 0; i < os.cpus().length / 2; i++) {
-    var worker = cluster.fork();
-  }
-} else {
+// if (cluster.isMaster) {
+//   console.log("CPUS: " + os.cpus().length);
+//   for (var i = 0; i < os.cpus().length / 2; i++) {
+//     var worker = cluster.fork();
+//   }
+// } else {
   server = app.listen(3000);
   console.log('Express server listening on port ' + app.get('port'));
   
@@ -58,4 +58,4 @@ if (cluster.isMaster) {
       client.emit("count", count.n);
     });
   });  
-}
+// }
