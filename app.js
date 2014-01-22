@@ -37,7 +37,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/hover-counts', routes.hoverCounts);
 app.post('/', routes.index);
-app.get('/mu-be6d30bd-e9ba653e-3df1812a-6e7174cd', routes.blitz);
+app.get('/mu-18eef9da-cbd65f78-56369f04-64914c2a', routes.blitz);
 app.get('/doNothing', routes.doNothing);
 app.post('/loadTest', routes.loadTest);
 
