@@ -47,8 +47,5 @@ exports.loadTest = function(req, res){
 }
 
 exports.doNothing = function(req, res){
-  setTimeout(function(){
-    res.writeHead(200);
-    res.end();
-  }, 10);
+  res.end();
 }
