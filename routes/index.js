@@ -10,7 +10,7 @@ exports.index = function(req, res) {
       } else {
         res.end('saved');
                 
-        send total no of rows to client sockets
+        // send total no of rows to client sockets
         db.positions.runCommand('count', function(err, count) {
           io.sockets.emit("count", count.n);
         });
