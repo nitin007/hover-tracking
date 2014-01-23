@@ -11,9 +11,9 @@ exports.index = function(req, res) {
         res.end('saved');
                 
         //send total no of rows to client sockets
-        db.positions.runCommand('count', function(err, count) {
-          io.sockets.emit("count", count.n);
-        });
+        // db.positions.runCommand('count', function(err, count) {
+        //   io.sockets.emit("count", count.n);
+        // });
       }
     });
   } else {
@@ -39,9 +39,9 @@ exports.loadTest = function(req, res){
       // console.log(++sucCount);
       
       //send total no of rows to client sockets
-      db.positions.runCommand('count', function(err, count) {
-        io.sockets.emit("count", count.n);
-      });
+      // db.positions.runCommand('count', function(err, count) {
+      //   io.sockets.emit("count", count.n);
+      // });
     }
   });
 }
