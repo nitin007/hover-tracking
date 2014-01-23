@@ -9,7 +9,7 @@ var routes = require('./routes');
 var cluster = require('cluster');
 var os = require("os");
 var http = require('http');
-// var socket = require("socket.io");
+var socket = require("socket.io");
 var path = require('path');
 var app = express();
 
@@ -17,8 +17,6 @@ var databaseUrl = "hoverTracker"; // "username:password@example.com/mydb"
 var collections = ["positions"];
 db = require("mongojs").connect(databaseUrl, collections);
 
-
-// http.globalAgent.maxSockets = 2000;
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -53,11 +51,11 @@ app.post('/loadTest', routes.loadTest);
   server = app.listen(3000);
   console.log('Express server listening on port ' + app.get('port'));
   
-  // io = socket.listen(server);
-  // 
-  // io.sockets.on('connection', function(client){
-  //   db.positions.runCommand('count', function(err, count) {
-  //     client.emit("count", count.n);
-  //   });
-  // });  
+  io = socket.listen(server);
+  
+  io.sockets.on('connection', function(client){
+    db.positions.runCommand('count', function(err, count) {
+      client.emit("count", count.n);
+    });
+  });  
 // }
