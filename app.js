@@ -13,12 +13,12 @@ var socket = require("socket.io");
 var path = require('path');
 var app = express();
 
-var databaseUrl = "mongodb://node:123456@widmore.mongohq.com:10010/hover-tracker" || "hoverTracker"; // "username:password@example.com/mydb"
+var databaseUrl = "hoverTracker"; // "username:password@example.com/mydb"
 var collections = ["positions"];
 db = require("mongojs").connect(databaseUrl, collections);
 
 
-http.globalAgent.maxSockets = 2000;
+// http.globalAgent.maxSockets = 2000;
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -39,7 +39,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/hover-counts', routes.hoverCounts);
 app.post('/', routes.index);
-app.get('/mu-18eef9da-cbd65f78-56369f04-64914c2a', routes.blitz);
+app.get('/mu-14e1dcf4-852e4450-168c1169-1a04c5ed', routes.blitz);
 app.get('/doNothing', routes.doNothing);
 app.post('/loadTest', routes.loadTest);
 
